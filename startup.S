@@ -22,4 +22,5 @@ bss_clear:
   ret
 
 finish:
+ wfe
 
