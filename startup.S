@@ -13,5 +13,6 @@ start:
   beq 2f
   str xzr, [x1]
   add x1, x1, #4
+  b 1b
   
 ret
