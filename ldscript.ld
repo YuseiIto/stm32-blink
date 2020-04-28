@@ -52,6 +52,6 @@ SECTIONS
           __stack_end = .;
           . = . + 1024 * 32;
           . = ALIGN(4);
-          __stack_end = . ;
+          __stack_start = . ;
          } > RAM
 }
