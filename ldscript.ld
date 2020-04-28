@@ -53,5 +53,5 @@ SECTIONS
           . = . + 1024 * 32;
           . = ALIGN(4);
           __stack_end = . ;
-         } > CCRAM
+         } > RAM
 }
