@@ -10,5 +10,6 @@ start:
   ldr x2, =__bss_end
  1:
   cmp x1,x2
-
+  beq 2f
+  
 ret
