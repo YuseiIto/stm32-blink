@@ -8,5 +8,7 @@ start:
  bss_clear:
   ldr x1, =__bss_start
   ldr x2, =__bss_end
-  
+ 1:
+  cmp x1,x2
+
 ret
