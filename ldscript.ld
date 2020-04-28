@@ -39,5 +39,19 @@ SECTIONS
          *(.bss*)
          __bss_end = . ;
         } > RAM
+
+ .heap: {
+         __heap_start = . ;
+         /* 32KiB heap */ 
+         . = . + 1024 * 32;
+         . = ALIGN(2048);
+         __heap_end = . ;
+        } > RAM
  
+ .stack: {
+          __stack_end = .;
+          . = . + 1024 * 32;
+          . = ALIGN(2048);
+          __stack_end = . ;
+         } > CCRAM
 }
