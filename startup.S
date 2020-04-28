@@ -9,6 +9,7 @@ _start:
  bl bss_clear
  bl main
 
+.section ".text"
 bss_clear:
   ldr x1, =__bss_start
   ldr x2, =__bss_end
