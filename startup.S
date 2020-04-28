@@ -1,8 +1,8 @@
 .align 4
 .global label
 .section ".text.start"　//ここから実行される
-.global start
-start:
+.global _start
+_start:
  msr DAIFSet, 0x0f
  ldr x0, =__stack_start
  mov sp,x0
