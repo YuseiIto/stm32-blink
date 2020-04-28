@@ -4,5 +4,5 @@
 .global start
 start:
  msr DAIFSet, 0x0f
- 
+ ldr x0, =__stack_start
 ret
