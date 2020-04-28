@@ -23,4 +23,5 @@ bss_clear:
 
 finish:
  wfe
+ b finish
 
