@@ -22,8 +22,22 @@ SECTIONS
  
  .rodata : {
           __rodata_start = . ;
-          *(*rodata*)
+          *(.rodata*)
           . = ALIGN(2048);
           __rodata_end = . ;
- } > FLASH 
+           } > RAM
+ 
+ .data : {
+         __data_start = . ;
+         *(.data*)
+         . = ALIGN(2048);
+         __data_end = . ;
+         } > RAM
+ 
+ .bss : {
+         __bss_start = . ;
+         *(.bss*)
+         __bss_end = . ;
+        } > RAM
+ 
 }
