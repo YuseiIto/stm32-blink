@@ -12,5 +12,6 @@ start:
   cmp x1,x2
   beq 2f
   str xzr, [x1]
+  add x1, x1, #4
   
 ret
