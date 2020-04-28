@@ -11,5 +11,6 @@ start:
  1:
   cmp x1,x2
   beq 2f
+  str xzr, [x1]
   
 ret
