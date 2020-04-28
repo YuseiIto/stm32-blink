@@ -3,5 +3,6 @@
 .section ".text.start"　//ここから実行される
 .global start
 start:
-
+ msr DAIFSet, 0x0f
+ 
 ret
