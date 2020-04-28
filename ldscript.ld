@@ -16,8 +16,14 @@ SECTIONS
           __start = . ;
           KEEP(*(.text.start))
           *(.text*)
-          . = ALIGN(2048)
+          . = ALIGN(2048);
           __text_end = . ;
         } > FLASH
-
+ 
+ .rodata : {
+          __rodata_start = . ;
+          *(*rodata*)
+          . = ALIGN(2048);
+          __rodata_end = . ;
+ } > FLASH 
 }
