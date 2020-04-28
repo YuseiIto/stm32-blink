@@ -25,7 +25,7 @@ SECTIONS
           *(.rodata*)
           . = ALIGN(4);
           __rodata_end = . ;
-           } > RAM
+           } > FLASH
  
  .data : {
          __data_start = . ;
