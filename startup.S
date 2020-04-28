@@ -20,3 +20,5 @@ start:
   b 1b
  2:
   ret
+
+finish:
