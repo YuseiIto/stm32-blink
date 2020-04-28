@@ -16,21 +16,21 @@ SECTIONS
           __start = . ;
           KEEP(*(.text.start))
           *(.text*)
-          . = ALIGN(2048);
+          . = ALIGN(4);
           __text_end = . ;
         } > FLASH
  
  .rodata : {
           __rodata_start = . ;
           *(.rodata*)
-          . = ALIGN(2048);
+          . = ALIGN(4);
           __rodata_end = . ;
            } > RAM
  
  .data : {
          __data_start = . ;
          *(.data*)
-         . = ALIGN(2048);
+         . = ALIGN(4);
          __data_end = . ;
          } > RAM
  
@@ -44,14 +44,14 @@ SECTIONS
          __heap_start = . ;
          /* 32KiB heap */ 
          . = . + 1024 * 32;
-         . = ALIGN(2048);
+         . = ALIGN(4);
          __heap_end = . ;
         } > RAM
  
  .stack: {
           __stack_end = .;
           . = . + 1024 * 32;
-          . = ALIGN(2048);
+          . = ALIGN(4);
           __stack_end = . ;
          } > CCRAM
 }
