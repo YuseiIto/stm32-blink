@@ -1,57 +1,84 @@
-/*　_startから呼ぶ　*/
+/* Entry Point */
 ENTRY(_start)
 
-/* メモリ領域の指定 */
+/* Specify the memory areas */
+
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 12K
-CCMRAM (rw)      : ORIGIN = 0x10000000, LENGTH = 4K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 64K
+ RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 12K /* SRAM area */
+ FLASH (rx) : ORIGIN = 0x8000000, LENGTH = 64K /* Flash ROM area */
 }
 
+/* Define output sections */
 SECTIONS
 {
- .text : {
-          __text_start = . ;
-          __start = . ;
-          KEEP(*(.text.start))
-          *(.text*)
-          . = ALIGN(4);
-          __text_end = . ;
-        } > FLASH
- 
- .rodata : {
-          __rodata_start = . ;
-          *(.rodata*)
-          . = ALIGN(4);
-          __rodata_end = . ;
-           } > FLASH
- 
- .data : {
-         __data_start = . ;
-         *(.data*)
-         . = ALIGN(4);
-         __data_end = . ;
-         } > RAM AT> FLASH
- 
- .bss : {
-         __bss_start = . ;
-         *(.bss*)
-         __bss_end = . ;
-        } > RAM
+  /* The startup code goes first into FLASH */
+  .isr_vector :
+  {
+    . = ALIGN(4);
+    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);
+  } >FLASH
 
- .heap: {
-         __heap_start = . ;
-         /* 32KiB heap */ 
-         . = . + 1024 * 32;
-         . = ALIGN(4);
-         __heap_end = . ;
-        } > RAM
- 
- .stack: {
-          __stack_end = .;
-          . = . + 1024 * 32;
-          . = ALIGN(4);
-          __stack_start = . ;
-         } > RAM
+ .text :
+  {
+    . = ALIGN(4);
+    _stext = .; /* Start of code */
+    /* text sections (contains code) */
+    *(.text)
+    *(.text*)
+    . = ALIGN(4);
+    _etext = .; /* End of code */
+  } >FLASH
+
+  .rodata :
+  {
+    . = ALIGN(4);
+    /* rodata sections(contains constants) */
+    *(.rodata)
+    *(.rodata*)
+    . = ALIGN(4);
+  } >FLASH
+
+
+  _sidata = LOADADDR(.data); /* Address on ROM */
+
+  .data : 
+  {
+    . = ALIGN(4);
+    _sdata = .; 
+    *(.data) 
+    *(.data*)
+
+    . = ALIGN(4);
+    _edata = .; 
+  } >RAM AT> FLASH
+
+  
+  . = ALIGN(4);
+  .bss :
+  {
+    _sbss = .;
+    *(.bss)
+    *(.bss*)
+    . = ALIGN(4);
+    _ebss = .; 
+  } >RAM
+
+  .heap : {
+        _sheap= .;
+        /* 1KiB heap */ 
+        . = . + 1024 ;
+        . = ALIGN(4);
+        _eheap = .;
+  }> RAM
+
+  .stack : {
+        _estack = .;
+        /* 1KiB stack*/
+        _stack = _estack + 1024;
+  }> RAM
+
 }
+
+
