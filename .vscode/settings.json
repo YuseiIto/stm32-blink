@@ -1,0 +1,7 @@
+{
+ "files.associations": {
+  "stm32f303k8_addrs.h": "c",
+  "stdint.h": "c",
+  "stm32f303x8.h": "c"
+ }
+}
